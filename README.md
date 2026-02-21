@@ -1,4 +1,4 @@
-# Coffee Shop ERD and DDL System
+# Coffee Shop ERD (ENTITY RELATIONSHIP DIAGRAM)
 
 ```mermaid
 erDiagram
