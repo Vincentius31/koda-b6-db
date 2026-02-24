@@ -42,6 +42,7 @@ erDiagram
         string desc
         int price
         int quantity
+        boolean isActive
     }
 
     CATEGORY {
