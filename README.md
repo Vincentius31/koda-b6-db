@@ -55,7 +55,7 @@ erDiagram
     }
 
     DISCOUNT {
-        int id_diskon PK
+        int id_discount PK
         int product_id FK
         float discount_rate
         string description
@@ -106,7 +106,7 @@ erDiagram
     }
 
     REVIEW {
-        int id_ulasan PK
+        int id_review PK
         int user_id FK
         int product_id FK
         string messages
