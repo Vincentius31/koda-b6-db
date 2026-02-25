@@ -86,8 +86,8 @@ CREATE TABLE CART (
 
     FOREIGN KEY ("user_id") REFERENCES "USERS"("id_user") ON DELETE CASCADE,
     FOREIGN KEY ("product_id") REFERENCES "PRODUCTS"("id_product") ON DELETE CASCADE,
-    FOREIGN KEY (variant_id) REFERENCES "PRODUCT_VARIANT"("id_variant"),
-    FOREIGN KEY (size_id) REFERENCES "PRODUCT_SIZE"("id_size")
+    FOREIGN KEY ("variant_id") REFERENCES "PRODUCT_VARIANT"("id_variant"),
+    FOREIGN KEY ("size_id") REFERENCES "PRODUCT_SIZE"("id_size")
 );
 
 CREATE TABLE TRANSACTION (
