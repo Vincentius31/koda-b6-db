@@ -189,7 +189,8 @@ INSERT INTO "product_variant" ("product_id", "variant_name", "additional_price")
 (6, 'Hot', 0), (6, 'Ice', 2000),
 (10, 'Hot', 0), (10, 'Ice', 2000),
 (5, 'Spicy', 2000), (5, 'Non-Spicy', 0),
-(8, 'Spicy', 2000), (8, 'Non-Spicy', 0);
+(8, 'Spicy', 2000), (8, 'Non-Spicy', 0),
+(4, 'Chocolate', 2000), (4, 'Matcha', 3000);
 
 INSERT INTO "product_size" ("product_id", "size_name", "additional_price") VALUES 
 (1, 'Regular', 0), (1, 'Medium', 3000), (1, 'Large', 5000),
