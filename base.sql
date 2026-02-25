@@ -1,10 +1,10 @@
 CREATE TABLE ROLES (
-    "id_roles" INT PRIMARY KEY,
+    "id_roles" SERIAL PRIMARY KEY,
     "name_roles" VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE USERS (
-    "id_user" INT PRIMARY KEY,
+    "id_user" SERIAL PRIMARY KEY,
     "roles_id" INT,
     "fullname" VARCHAR(100) NOT NULL,
     "email" VARCHAR(100) UNIQUE NOT NULL,
@@ -17,12 +17,12 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE CATEGORY (
-    "id_category" INT PRIMARY KEY,
+    "id_category" SERIAL PRIMARY KEY,
     "name_category" VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE PRODUCTS (
-    "id_product" INT PRIMARY KEY,
+    "id_product" SERIAL PRIMARY KEY,
     "name" VARCHAR(150) NOT NULL,
     "desc" TEXT,
     "price" INT NOT NULL,
@@ -31,17 +31,15 @@ CREATE TABLE PRODUCTS (
 );
 
 CREATE TABLE PRODUCTS_CATEGORY (
-    "product_id" INT,
-    "category_id" INT,
-    
-    PRIMARY KEY ("product_id", "category_id"),
+    "product_id" SERIAL PRIMARY KEY,
+    "category_id" SERIAL PRIMARY KEY,
 
     FOREIGN KEY ("product_id") REFERENCES "PRODUCTS"("id_product") ON DELETE CASCADE,
     FOREIGN KEY ("category_id") REFERENCES "CATEGORY"("id_category") ON DELETE CASCADE
 );
 
 CREATE TABLE PRODUCT_IMAGES (
-    "id_image" INT PRIMARY KEY,
+    "id_image" SERIAL PRIMARY KEY,
     "product_id" INT,
     "path" VARCHAR(255) NOT NULL,
 
@@ -49,7 +47,7 @@ CREATE TABLE PRODUCT_IMAGES (
 );
 
 CREATE TABLE PRODUCT_VARIANT (
-    "id_variant" INT PRIMARY KEY,
+    "id_variant" SERIAL PRIMARY KEY,
     "product_id" INT,
     "variant_name" VARCHAR(100),
     "additional_price" INT DEFAULT 0,
@@ -58,7 +56,7 @@ CREATE TABLE PRODUCT_VARIANT (
 );
 
 CREATE TABLE PRODUCT_SIZE (
-    "id_size" INT PRIMARY KEY,
+    "id_size" SERIAL PRIMARY KEY,
     "product_id" INT,
     "size_name" VARCHAR(50),
     "additional_price" INT DEFAULT 0,
@@ -67,7 +65,7 @@ CREATE TABLE PRODUCT_SIZE (
 );
 
 CREATE TABLE DISCOUNT (
-    "id_discount" INT PRIMARY KEY,
+    "id_discount" SERIAL PRIMARY KEY,
     "product_id" INT,
     "discount_rate" FLOAT NOT NULL,
     "description" VARCHAR(255),
@@ -77,7 +75,7 @@ CREATE TABLE DISCOUNT (
 );
 
 CREATE TABLE CART (
-    "id_cart" INT PRIMARY KEY,
+    "id_cart" SERIAL PRIMARY KEY,
     "user_id" INT,
     "product_id" INT,
     "variant_id" INT,
@@ -104,7 +102,7 @@ CREATE TABLE TRANSACTION (
 );
 
 CREATE TABLE TRANSACTION_PRODUCT (
-    "id_trans_prod" INT PRIMARY KEY,
+    "id_trans_prod" SERIAL PRIMARY KEY,
     "transaction_id" INT,
     "product_id" INT,
     "quantity" INT NOT NULL,
@@ -117,7 +115,7 @@ CREATE TABLE TRANSACTION_PRODUCT (
 );
 
 CREATE TABLE REVIEW (
-    "id_review" INT PRIMARY KEY,
+    "id_review" SERIAL PRIMARY KEY,
     "user_id" INT,
     "product_id" INT,
     "messages" TEXT,
