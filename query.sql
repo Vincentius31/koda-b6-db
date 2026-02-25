@@ -1,11 +1,20 @@
 -- Mendapatkan satu product yang dimana sudah di agregasikan dengan variant dan size yang dipilih
 
-SELECT products.id_product, products.name, products.price AS "base_price", category.name_category,
-    ARRAY_AGG(DISTINCT product_variant.variant_name) FILTER (WHERE product_variant.variant_name IS NOT NULL) AS "available_variants",
-    ARRAY_AGG(DISTINCT product_size.size_name) FILTER (WHERE product_size.size_name IS NOT NULL) AS "available_sizes"
-FROM products LEFT JOIN products_category ON products.id_product = products_category.product_id 
-LEFT JOIN category ON products_category.category_id = category.id_category
-LEFT JOIN product_variant ON products.id_product = product_variant.product_id
-LEFT JOIN product_size ON products.id_product = product_size.product_id
-WHERE products.id_product = 2 -- Bisa diganti sesuai dengan kebutuhan ingin menampilkan data product yang mana
-GROUP BY products.id_product, category.name_category;
+SELECT 
+    products.id_product,
+    products.name AS "Product Name",
+    product_variant.variant_name AS "Variant",
+    product_size.size_name AS "Size",
+    product_variant.additional_price AS "Variant Extra Price",
+    product_size.additional_price AS "Size Extra Size",
+    (products.price + product_variant.additional_price + product_size.additional_price) AS "Total Price"
+FROM 
+    products 
+JOIN 
+    product_variant  ON products.id_product = product_variant.product_id
+JOIN 
+    product_size ON products.id_product = product_size.product_id
+WHERE 
+    products.id_product = 4 AND
+    product_variant.id_variant = 23 AND
+    product_size.id_size = 25;       
