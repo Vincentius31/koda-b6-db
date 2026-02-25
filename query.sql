@@ -40,7 +40,7 @@ SELECT
           AND pv2.id_variant = product_variant.id_variant 
           AND ps2.id_size = product_size.id_size
     ) AS "Unit Price",
-    10 AS "quantity",
+    10 AS "Quantity",
     (
         SELECT (p2.price + pv2.additional_price + ps2.additional_price)
         FROM products AS p2
