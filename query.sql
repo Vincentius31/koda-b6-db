@@ -7,4 +7,5 @@ FROM products LEFT JOIN products_category ON products.id_product = products_cate
 LEFT JOIN category ON products_category.category_id = category.id_category
 LEFT JOIN product_variant ON products.id_product = product_variant.product_id
 LEFT JOIN product_size ON products.id_product = product_size.product_id
+WHERE products.id_product = 2 -- Bisa diganti sesuai dengan kebutuhan ingin menampilkan data product yang mana
 GROUP BY products.id_product, category.name_category;
