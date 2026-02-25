@@ -157,7 +157,16 @@ INSERT INTO "products" ("name", "desc", "price", "quantity", "is_active") VALUES
 ('Taro Latte', 'Minuman talas ungu', 32000, 55, TRUE);
 
 INSERT INTO "products_category" ("product_id", "category_id") VALUES 
-(1,1), (2,1), (3,2), (4,3), (5,3), (6,2), (7,1), (8,3), (9,1), (10,2);
+(1,1), 
+(2,1), 
+(3,2), 
+(4,3), 
+(5,3), 
+(6,2), 
+(7,1), 
+(8,3), 
+(9,1), 
+(10,2);
 
 INSERT INTO "product_images" ("product_id", "path") VALUES 
 (1, 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg'),
@@ -171,20 +180,73 @@ INSERT INTO "product_images" ("product_id", "path") VALUES
 (9, 'https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg'),
 (10, 'https://images.pexels.com/photos/5947020/pexels-photo-5947020.jpeg');
 
-
 INSERT INTO "product_variant" ("product_id", "variant_name", "additional_price") VALUES 
-(1, 'Hot', 0), (2, 'Ice', 2000), (5, 'Spicy', 5000), (8, 'Non-Spicy', 0);
-
+(1, 'Hot', 0), (1, 'Ice', 2000),
+(2, 'Hot', 0), (2, 'Ice', 2000),
+(7, 'Hot', 0), (7, 'Ice', 2000),
+(9, 'Hot', 0), (9, 'Ice', 2000),
+(3, 'Hot', 0), (3, 'Ice', 2000),
+(6, 'Hot', 0), (6, 'Ice', 2000),
+(10, 'Hot', 0), (10, 'Ice', 2000),
+(5, 'Spicy', 2000), (5, 'Non-Spicy', 0),
+(8, 'Spicy', 2000), (8, 'Non-Spicy', 0);
 
 INSERT INTO "product_size" ("product_id", "size_name", "additional_price") VALUES 
-(1, 'Regular', 0), (2, 'Medium', 3000), (3, 'Large', 5000), (7, '250gr', 50000);
+(1, 'Regular', 0), (1, 'Medium', 3000), (1, 'Large', 5000),
+(2, 'Regular', 0), (2, 'Medium', 3000), (2, 'Large', 5000),
+(3, 'Regular', 0), (3, 'Medium', 3000), (3, 'Large', 5000),
+(6, 'Regular', 0), (6, 'Medium', 3000), (6, 'Large', 5000),
+(9, 'Regular', 0), (9, 'Medium', 3000), (9, 'Large', 5000),
+(10, 'Regular', 0), (10, 'Medium', 3000), (10, 'Large', 5000),
+(7, '250gr', 50000), (7, '500gr', 90000),
+(4, 'Regular', 0),
+(5, 'Regular', 0),
+(8, 'Regular', 0);
 
-INSERT INTO "transaction" ("user_id", "transaction_number", "delivery_method", "subtotal", "total", "status", "payment_method") VALUES 
-(2, 'ORD-2026022509301234', 'Pick Up', 60000, 65000, 'Success', 'Cash'),
-(3, 'ORD-2026022509355678', 'Dine In', 35000, 35000, 'Success', 'Cash'),
-(4, 'ORD-2026022509409912', 'Take Away', 45000, 45000, 'Pending', 'Cash');
+INSERT INTO "transaction" ("id_transaction", "user_id", "transaction_number", "delivery_method", "subtotal", "total", "status", "payment_method") VALUES 
+(1, 2, 'ORD-2026022509301234', 'Pick Up', 60000, 66000, 'Success', 'Cash'),
+(2, 3, 'ORD-2026022509355678', 'Dine In', 35000, 38500, 'Success', 'Cash'),
+(3, 4, 'ORD-2026022509409912', 'Take Away', 45000, 49500, 'Pending', 'Cash'),
+(4, 5, 'ORD-2026022510014421', 'Take Away', 80000, 88000, 'Success', 'Cash'),
+(5, 6, 'ORD-2026022510051192', 'Dine In', 25000, 27500, 'Success', 'Cash'),
+(6, 7, 'ORD-2026022510103384', 'Take Away', 120000, 132000, 'Pending', 'Cash'),
+(7, 8, 'ORD-2026022510156672', 'Take Away', 45000, 49500, 'Success', 'Cash'),
+(8, 9, 'ORD-2026022510208819', 'Dine In', 32000, 35200, 'Canceled', 'Cash'),
+(9, 10, 'ORD-2026022510255543', 'Take Away', 55000, 60500, 'Success', 'Cash'),
+(10, 2, 'ORD-2026022510302211', 'Take Away', 90000, 99000, 'Success', 'Cash');
 
 INSERT INTO "transaction_product" ("transaction_id", "product_id", "quantity", "size", "variant", "price") VALUES 
-(1, 2, 2, 'Medium', 'Ice', 60000),
-(2, 3, 1, 'Large', 'Ice', 35000),
-(3, 5, 1, 'Regular', 'Spicy', 45000);
+(1, 2, 2, 'Medium', 'Ice', 60000),      
+(2, 3, 1, 'Large', 'Ice', 35000),       
+(3, 5, 1, 'Regular', 'Spicy', 45000),   
+(4, 8, 2, 'Regular', 'Non-Spicy', 80000), 
+(5, 4, 1, 'Regular', NULL, 25000),      
+(6, 7, 2, '500gr', 'Ice', 120000),      
+(7, 5, 1, 'Regular', 'Spicy', 50000),   
+(8, 10, 1, 'Regular', 'Ice', 32000),    
+(9, 3, 1, 'Large', 'Hot', 40000),      
+(10, 2, 3, 'Medium', 'Ice', 90000);     
+
+INSERT INTO "discount" ("product_id", "discount_rate", "description", "is_flash_sale") VALUES 
+(1, 0.1, 'Morning Coffee Promo 10%', FALSE),
+(2, 0.15, 'Latte Love Discount', FALSE),
+(5, 0.5, 'Flash Sale Nasi Goreng!', TRUE),
+(9, 0.2, 'Caramel Sweet Weekend', FALSE),
+(3, 0.05, 'Matcha Monday', FALSE),
+(4, 0.12, 'Pastry Bundle', FALSE),
+(6, 0.25, 'Chocolate Rush', TRUE),
+(7, 0.1, 'Morning Coffee', FALSE),
+(8, 0.2, 'Chicken Weekend', FALSE),
+(10, 0.15, 'Taro Special', TRUE);
+
+INSERT INTO "review" ("user_id", "product_id", "messages", "rating") VALUES 
+(2, 1, 'Espresso-nya mantap, nendang banget!', 5.0),
+(3, 2, 'Latte-nya lembut, tapi kurang manis sedikit.', 4.0),
+(4, 7, 'Biji kopinya segar, harum pas dibuka.', 5.0),
+(5, 5, 'Pedasnya juara! Porsinya juga pas.', 4.5),
+(6, 3, 'Matcha-nya agak terlalu manis buat saya.', 3.5);
+(7, 8, 'Ayamnya krispi banget!', 5.0),
+(8, 9, 'Karamelnya berasa premium.', 4.8),
+(9, 10, 'Warna taronya cantik, rasanya enak.', 4.5),
+(10, 4, 'Croissant paling lembut di kota ini.', 5.0),
+(2, 6, 'Cokelatnya pekat, anak saya suka.', 4.7);
