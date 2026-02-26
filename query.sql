@@ -71,3 +71,59 @@ LIMIT 4;
 -- Section Testimonial
 SELECT users.fullname, review.messages, review.rating
 FROM users JOIN review ON review.user_id = users.id_user;
+
+--Pada Browse Product, query apa yang dibutuhkan?
+
+-- Section Today Promos
+SELECT discount.description
+FROM discount
+WHERE discount.is_flash_sale = TRUE;
+
+-- Fitur Filter Search Products
+SELECT products.name AS product_name, products.desc AS description, product_images.path AS product_image, AVG(review.rating) AS average_rating, products.price AS normal_price, (products.price - (products.price * discount.discount_rate)) AS discounted_price
+FROM products JOIN product_images  ON products.id_product = product_images.product_id
+JOIN review ON products.id_product = review.product_id
+JOIN discount ON products.id_product = discount.product_id
+WHERE products.name ILIKE '%Latte' -- Contoh jika user mencari products dengan kata kunci latte.
+GROUP BY products.id_product, products.name, products.desc, products.price, product_images.path, discount.discount_rate;
+
+-- Fitur Filter Berdasarkan Category
+
+SELECT products.name AS product_name, products.desc AS description, product_images.path AS product_image, AVG(review.rating) AS average_rating, products.price AS normal_price, (products.price - (products.price * discount.discount_rate)) AS discounted_price
+FROM products
+JOIN products_category ON products.id_product = products_category.product_id
+JOIN category ON products_category.category_id = category.id_category
+LEFT JOIN product_images ON products.id_product = product_images.product_id
+LEFT JOIN review ON products.id_product = review.product_id
+LEFT JOIN discount ON products.id_product = discount.product_id
+WHERE category.name_category = 'Coffee'
+GROUP BY products.id_product, products.name, products.desc, product_images.path, products.price, discount.discount_rate;
+
+-- Fitur Filter berdasarkan discount
+
+SELECT products.name AS product_name, products.desc AS description, product_images.path AS product_image, AVG(review.rating) AS average_rating, products.price AS normal_price, 
+(products.price - (products.price * discount.discount_rate)) AS discounted_price
+FROM products
+JOIN discount ON products.id_product = discount.product_id
+LEFT JOIN product_images ON products.id_product = product_images.product_id
+LEFT JOIN review ON products.id_product = review.product_id
+WHERE discount.description = 'Morning Coffee Promo 10%'
+GROUP BY products.id_product, products.name, products.desc, product_images.path, products.price, discount.discount_rate;
+
+-- Fitur Filter berdasarkan price range (10000 s/d 20000)
+
+SELECT products.name AS product_name, products.desc AS description, product_images.path AS product_image, AVG(review.rating) AS average_rating, products.price AS normal_price, 
+(products.price - (products.price * discount.discount_rate)) AS discounted_price
+FROM products
+LEFT JOIN product_images ON products.id_product = product_images.product_id
+LEFT JOIN review ON products.id_product = review.product_id
+LEFT JOIN discount ON products.id_product = discount.product_id
+WHERE products.price BETWEEN 10000 AND 20000
+GROUP BY 
+    products.id_product, 
+    products.name, 
+    products.desc, 
+    product_images.path, 
+    products.price, 
+    discount.discount_rate;
+
